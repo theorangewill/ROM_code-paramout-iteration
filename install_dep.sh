@@ -42,8 +42,7 @@ unzip -q cylinder.zip
 rm cylinder.zip 
 cd ..
 #echo "Modificando arquivos para executar codigo"
-sed -i '1s#/home/cfd/Desktop/hugo/#'"$CURRDIR"'#/' code/inputs.inp
-sed -i '3s#/home/cfd/Desktop/hugo/ROM_code#'"$CURRDIR"'#' code/inputs.inp
+sed -i '1s#/home/cfd/Desktop/hugo/#'"$CURRDIR"'/#' code/inputs.inp
+sed -i '3s#/home/cfd/Desktop/hugo/ROM_code#'"$CURRDIR"'/#' code/inputs.inp
 echo Instalando imagem do container
 singularity build dnn_rom.sif dnn_rom.def
-echo alias sngshell="sudo singularity shell --nv $CURRDIR/dnn_rom.sif" >> ~/.bashrc
