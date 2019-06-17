@@ -4,6 +4,7 @@ import os
 import shutil
 from rk45 import RK45
 import matplotlib.pyplot as plt
+import time
 
 #### folder path ###
 path = os.path.dirname(os.getcwd())
@@ -142,8 +143,9 @@ file.close()
 os.system('sh compile.sh')
 os.system('./reconst.out')
 
+iteracao=0
 for i in range(1,len(best_models)):
-  
+  antes = time.time()
   # Load inputs file
   with open('inputs_reconst.inp') as f:
       inputs = f.read()
@@ -164,7 +166,9 @@ for i in range(1,len(best_models)):
   # Run reconst.f90
   os.system('sh compile.sh')
   os.system('./reconst.out')
-
+  depois = time.time()
+  iteracao+=1
+  print("***"+str(iteracao)+";"+str(depois-antes))
 
 ### Find best model ###
 L1_error = np.genfromtxt('./data/L1_error.dat') # L1_error of each model
@@ -189,9 +193,6 @@ for x in inputs:
     file.write('%s   '  % x )
     file.write(' \n') 
 file.close()
-
 # Run reconst.f90
 os.system('sh compile.sh')
 os.system('./reconst.out')
-
-

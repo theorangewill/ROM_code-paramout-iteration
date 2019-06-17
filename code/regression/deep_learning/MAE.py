@@ -2,6 +2,7 @@ import numpy as np
 import scipy.io as sio
 import heapq
 import os
+import time
 
 ### Inputs ###
 # Load inputs file
@@ -27,7 +28,9 @@ n_var = X_train.shape[1] # Number of variables
 
 MAE_score = np.zeros(n_models) # Mean Absolute Error (MAE)
 ### Load candidate models results ###
+iteracoes = 0
 for i in range(n_models):
+  antes = time.time()
   X_dummy = np.genfromtxt('./results/temporal_modes/temporal_modes_' + str(i) +'.dat') 
   MAE = 0
   for j in range(n_var):
@@ -35,7 +38,9 @@ for i in range(n_models):
     ### Mean Absolute Error (MAE)
     MAE += (1/m)*np.sum(abs(X_train[:,j] - X_s))
   MAE_score[i] = MAE
-  
+  depois = time.time()
+  iteracoes += 1
+  print("***" + str(iteracoes) + ";"+ str(depois-antes))
 ### Best models ###
 best_models = heapq.nsmallest(int(n_models_eval), range(len(MAE_score)), MAE_score.take) 
 file = open('./results/best_models.dat',"w")

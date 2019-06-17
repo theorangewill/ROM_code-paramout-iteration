@@ -1,0 +1,151 @@
+ 
+Candidate model 0000
+  Reading grid data ...
+    Zone 1                        - nxTotal = 421 nyTotal = 199
+    Domain used in calculations   : nx      = 421 ny      = 199
+    Zone 2                        - nxTotal = 421 nyTotal = 476
+    Domain used in calculations   : nx      = 421 ny      = 476
+ 
+  Reading mean quantities ...
+ 
+  Reading spatial modes ...
+ 
+  Reading validation data ...
+  1. %
+  10. %
+  21. %
+  30. %
+  40. %
+  51. %
+  60. %
+  71. %
+  80. %
+  90. %
+  100. %
+  Reconstructing the Flowfield ...
+ Computing ||p_FOM - p_ROM || ...
+ 
+Candidate model 0012
+  Reading grid data ...
+    Zone 1                        - nxTotal = 421 nyTotal = 199
+    Domain used in calculations   : nx      = 421 ny      = 199
+    Zone 2                        - nxTotal = 421 nyTotal = 476
+    Domain used in calculations   : nx      = 421 ny      = 476
+ 
+  Reading mean quantities ...
+ 
+  Reading spatial modes ...
+ 
+  Reading validation data ...
+  1. %
+  10. %
+  21. %
+  30. %
+  40. %
+  51. %
+  60. %
+  71. %
+  80. %
+  90. %
+  100. %
+  Reconstructing the Flowfield ...
+ Computing ||p_FOM - p_ROM || ...
+ 
+Candidate model 0005
+  Reading grid data ...
+    Zone 1                        - nxTotal = 421 nyTotal = 199
+    Domain used in calculations   : nx      = 421 ny      = 199
+    Zone 2                        - nxTotal = 421 nyTotal = 476
+    Domain used in calculations   : nx      = 421 ny      = 476
+ 
+  Reading mean quantities ...
+ 
+  Reading spatial modes ...
+ 
+  Reading validation data ...
+  1. %
+  10. %
+  21. %
+  30. %
+  40. %
+  51. %
+  60. %
+  71. %
+  80. %
+  90. %
+  100. %
+  Reconstructing the Flowfield ...
+ Computing ||p_FOM - p_ROM || ...
+ 
+Candidate model 0011
+  Reading grid data ...
+    Zone 1                        - nxTotal = 421 nyTotal = 199
+    Domain used in calculations   : nx      = 421 ny      = 199
+    Zone 2                        - nxTotal = 421 nyTotal = 476
+    Domain used in calculations   : nx      = 421 ny      = 476
+ 
+  Reading mean quantities ...
+ 
+  Reading spatial modes ...
+ 
+  Reading validation data ...
+  1. %
+  10. %
+  21. %
+  30. %
+  40. %
+  51. %
+  60. %
+  71. %
+  80. %
+  90. %
+  100. %
+  Reconstructing the Flowfield ...
+ Computing ||p_FOM - p_ROM || ...
+ 
+Candidate model 0009
+  Reading grid data ...
+    Zone 1                        - nxTotal = 421 nyTotal = 199
+    Domain used in calculations   : nx      = 421 ny      = 199
+    Zone 2                        - nxTotal = 421 nyTotal = 476
+    Domain used in calculations   : nx      = 421 ny      = 476
+ 
+  Reading mean quantities ...
+ 
+  Reading spatial modes ...
+ 
+  Reading validation data ...
+  1. %
+  10. %
+  21. %
+  30. %
+  40. %
+  51. %
+  60. %
+  71. %
+  80. %
+  90. %
+  100. %
+  Reconstructing the Flowfield ...
+ Computing ||p_FOM - p_ROM || ...
+ 
+Candidate model 0000
+ 
+rebuiltSol_model_0000.cgns
+  Reading grid data ...
+    Zone 1                        - nxTotal = 421 nyTotal = 199
+    Domain used in calculations   : nx      = 421 ny      = 199
+    Zone 2                        - nxTotal = 421 nyTotal = 476
+    Domain used in calculations   : nx      = 421 ny      = 476
+ 
+  Reading mean quantities ...
+ 
+  Reading spatial modes ...
+  Reconstructing the best candidate model ...
+ 
+  Write CGNS file ...
+ Number of snapshots for reconstruction:        1120
+***1;32.837377309799194
+***2;33.02265286445618
+***3;32.769057750701904
+***4;32.99624466896057
