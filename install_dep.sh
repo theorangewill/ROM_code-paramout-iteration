@@ -45,4 +45,7 @@ cd ..
 sed -i '1s#/home/cfd/Desktop/hugo/#'"$CURRDIR"'/#' code/inputs.inp
 sed -i '3s#/home/cfd/Desktop/hugo/ROM_code#'"$CURRDIR"'/#' code/inputs.inp
 echo Instalando imagem do container
+if [ $1 == "cpu" ]; then
+	sed -i 's/tensorflow-gpu/tensorflow/' dnn_rom.def
+fi
 singularity build dnn_rom.sif dnn_rom.def
