@@ -16,7 +16,8 @@ curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python get-pip.py
 rm -f get-pip.py
 apt-get install -y python3.6-dev gcc g++ gfortran
-pip3 install numpy matplotlib scipy Cython scikit-optimize tensorflow-gpu
+pip3 install numpy matplotlib scipy Cython scikit-optimize 
+python3.6 -m pip install tensorflow-gpu
 pip3 install smt
 wget https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.10/hdf5-1.10.5/src/hdf5-1.10.5.tar.gz && tar zxvfp hdf5-1.10.5.tar.gz && cd hdf5-1.10.5
 ./configure && make && make install
