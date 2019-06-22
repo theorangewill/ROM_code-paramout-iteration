@@ -34,12 +34,9 @@ rm -rf $GOPATH
 #Download da base de dados e preparação do código
 echo "Baixando base de dados"
 apt-get install -y unzip
-mkdir cylinder_data 
-cd cylinder_data
-wget https://www.dropbox.com/sh/ji6i5u8valqyda8/AABtEYaZ7vG-62q6h4toQKBTa?dl=0
-mv AABtEYaZ7vG-62q6h4toQKBTa?dl=0 cylinder.zip
-unzip -q cylinder.zip
-rm cylinder.zip 
+mkdir dynamic_stall_data 
+cd dynamic_stall_data
+wget --no-check-certificate "https://onedrive.live.com/download?cid=68B743CBCE8A14C0&resid=68B743CBCE8A14C0%21107533&authkey=AIRCWrGDBz471sE"
 cd ..
 #echo "Modificando arquivos para executar codigo"
 sed -i '1s#/home/cfd/Desktop/hugo/#'"$CURRDIR"'/#' code/inputs.inp
@@ -48,4 +45,5 @@ echo Instalando imagem do container
 if [ $1 == "cpu" ]; then
 	sed -i 's/tensorflow-gpu/tensorflow/' dnn_rom.def
 fi
-singularity build dnn_rom.sif dnn_rom.def
+singularity build rom_dnn.sif dnn_rom.def
+nvidia-modprobe -u -c=0
