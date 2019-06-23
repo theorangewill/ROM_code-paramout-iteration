@@ -19,13 +19,13 @@ if [ "$#" -gt 0 ]; then
 	for i in {1..5}
 	do
 		echo i >> $ITYPE
-		python DNN_regression.py PARAMOUT >> $ITYPE
+		python DNN_regression.py $PARAMOUT >> $ITYPE
 	done
 	echo "full" >> $ITYPE
 	for i in {1..5}
 	do
 		echo i >> $ITYPE
-		python DNN_regression.py $1 >> $ITYPE
+		python DNN_regression.py $FULL >> $ITYPE
 	done
 	else
 		python DNN_regression.py &&
