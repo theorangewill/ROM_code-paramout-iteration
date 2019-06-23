@@ -11,12 +11,21 @@ sh compile.sh &&
 cd .. &&
 cd deep_learning/
 if [ "$#" -gt 0 ]; then
-        echo "Redirecionando saida para paramout_dnn.txt"
-        rm paramout_dnn.txt
+	PARAMOUT=5
+	FULL=50
+	ITYPE=$(curl http://169.254.169.254/latest/meta-data/instance-type).txt
+        rm $ITYPE
+	echo "paramout" >> $ITYPE 
 	for i in {1..5}
 	do
-		echo i >> paramout_dnn.txt
-		python DNN_regression.py $1 >> paramout_dnn.txt 
+		echo i >> $ITYPE
+		python DNN_regression.py PARAMOUT >> $ITYPE
+	done
+	echo "full" >> $ITYPE
+	for i in {1..5}
+	do
+		echo i >> $ITYPE
+		python DNN_regression.py $1 >> $ITYPE
 	done
 	else
 		python DNN_regression.py &&
