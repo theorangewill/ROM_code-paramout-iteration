@@ -7,12 +7,11 @@ ARCH=amd64
 CURRDIR=$(pwd)
 GOPATH=${HOME}/go
 PATH=/usr/local/go/bin:${PATH}:${GOPATH}/bin
-export DEBIAN_FRONTEND=noninteractive
 source ~/.bashrc
 
 
-sudo apt-get update -qy && \
-	sudo apt-get install -qy build-essential \
+sudo DEBIAN_FRONTEND=noninteractive apt-get update -qy && \
+	sudo DEBIAN_FRONTEND=noninteractive apt-get install -qy build-essential \
 	libssl-dev uuid-dev libgpgme11-dev libseccomp-dev pkg-config squashfs-tools
 	wget -O /tmp/go${VERSION}.${OS}-${ARCH}.tar.gz https://dl.google.com/go/go${VERSION}.${OS}-${ARCH}.tar.gz && \
 	sudo tar -C /usr/local -xzf /tmp/go${VERSION}.${OS}-${ARCH}.tar.gz 
