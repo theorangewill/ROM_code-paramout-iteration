@@ -27,6 +27,12 @@ if [ "$#" -gt 0 ]; then
 		echo $i >> $ITYPE
 		python DNN_regression.py $FULL >> $ITYPE
 	done
+	mv $ITYPE ../../../results/.
+	cd ../../..
+	git add results/$ITYPE
+	git commit -m "$ITYPE"
+	git push
+	aws ec2 terminate-instances --instance-ids $IID
 	else
 		python DNN_regression.py &&
                 python MAE.py &&
