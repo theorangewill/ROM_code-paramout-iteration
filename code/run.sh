@@ -16,13 +16,13 @@ if [ "$#" -gt 0 ]; then
 	ITYPE=$(curl http://169.254.169.254/latest/meta-data/instance-type).txt
         rm $ITYPE
 	echo "paramout" >> $ITYPE 
-	for i in {1..5}
+	for i in `seq 1 5`
 	do
 		echo i >> $ITYPE
 		python DNN_regression.py $PARAMOUT >> $ITYPE
 	done
 	echo "full" >> $ITYPE
-	for i in {1..5}
+	for i in `seq 1 5`
 	do
 		echo i >> $ITYPE
 		python DNN_regression.py $FULL >> $ITYPE
