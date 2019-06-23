@@ -18,13 +18,13 @@ if [ "$#" -gt 0 ]; then
 	echo "paramout" >> $ITYPE 
 	for i in `seq 1 5`
 	do
-		echo i >> $ITYPE
+		echo $i >> $ITYPE
 		python DNN_regression.py $PARAMOUT >> $ITYPE
 	done
 	echo "full" >> $ITYPE
 	for i in `seq 1 5`
 	do
-		echo i >> $ITYPE
+		echo $i >> $ITYPE
 		python DNN_regression.py $FULL >> $ITYPE
 	done
 	else
