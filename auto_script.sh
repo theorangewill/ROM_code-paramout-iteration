@@ -2,7 +2,7 @@
 sudo apt install -y awscli 
 export AWS_DEFAULT_REGION=us-east-1
 export AWS_ACCESS_KEY_ID=AKIATSRODRVJWJ5COHGO
-if [ $AWS_SECRET_ACCESS_KEY == '' ]; then
+if [ -z "$AWS_SECRET_ACCESS_KEY" ]; then
 	echo "Insira AWS secret key"
 	read akey
 	export AWS_SECRET_ACCESS_KEY=$akey
