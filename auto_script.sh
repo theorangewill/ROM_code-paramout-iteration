@@ -6,4 +6,4 @@ else
 fi
 echo $PAR
 ./install_dep.sh $PAR
-singularity exec $flag ./exec_script.sh 
+singularity exec rom_dnn.sif $flag ./exec_script.sh 
