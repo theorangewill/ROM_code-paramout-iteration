@@ -6,7 +6,7 @@ from system_identification import system_identification
 import os
 
 #start_time = time.time() # Start timer
-
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 print ('Computing DNN Regression')
 
 ### Inputs ###
@@ -62,6 +62,7 @@ os.system('mkdir -p ./results/temporal_modes')
 if (opt == 1):
 
   for i in range(n_models): 
+    start = time.time()
     lambd = 10**(-random.uniform(lambd_min,lambd_max)) # Regularization parameter
     layers_dims = np.zeros(int(random.uniform(n_layers_min,n_layers_max))) # DNN architecture
     layers_dims[0] = n_var # Input Layer size
@@ -70,6 +71,8 @@ if (opt == 1):
       layers_dims[j] = int(random.uniform(n_hidden_min,n_hidden_max)) # Hidden layers
       
     system_identification(X_train,Y_train,layers_dims,lambd,learning_rate,num_iter,h,i,nt_s) # Regression step via DNN
+    end = time.time()
+    print("#MODEL %d: %f", %(i,end-start))
 
   print ('DNN Regression complete!')
 
