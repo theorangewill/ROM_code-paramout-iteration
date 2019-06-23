@@ -29,6 +29,7 @@ if [ "$#" -gt 0 ]; then
 	done
 	mv $ITYPE ../../../results/.
 	cd ../../..
+	git pull
 	git add results/$ITYPE
 	git commit -m "$ITYPE"
 	git push && aws ec2 terminate-instances --instance-ids $IID
