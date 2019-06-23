@@ -72,7 +72,7 @@ if (opt == 1):
       
     system_identification(X_train,Y_train,layers_dims,lambd,learning_rate,num_iter,h,i,nt_s) # Regression step via DNN
     end = time.time()
-    print("#MODEL %d: %f", %(i,end-start))
+    print("#MODEL %d: %f" %(i,end-start))
 
   print ('DNN Regression complete!')
 
