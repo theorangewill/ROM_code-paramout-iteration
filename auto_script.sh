@@ -1,5 +1,5 @@
 #!/bin/bash
-sudo apt install -y awscli 
+sudo snap install aws-cli --classic
 export AWS_DEFAULT_REGION=us-east-1
 export AWS_ACCESS_KEY_ID=AKIATSRODRVJWJ5COHGO
 if [ -z "$AWS_SECRET_ACCESS_KEY" ]; then
