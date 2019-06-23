@@ -4,6 +4,7 @@ import random
 import scipy
 from system_identification import system_identification
 import os
+import sys 
 
 #start_time = time.time() # Start timer
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
@@ -60,7 +61,8 @@ os.system('mkdir -p ./results/temporal_modes')
 
 ### RANDOM SEARCH ###
 if (opt == 1):
-
+  if(len(sys.argv) > 1): 
+    n_models = int(sys.argv[1])
   for i in range(n_models): 
     start = time.time()
     lambd = 10**(-random.uniform(lambd_min,lambd_max)) # Regularization parameter
@@ -72,7 +74,8 @@ if (opt == 1):
       
     system_identification(X_train,Y_train,layers_dims,lambd,learning_rate,num_iter,h,i,nt_s) # Regression step via DNN
     end = time.time()
-    print("#MODEL %d: %f" %(i,end-start))
+    if(len(sys.argv) > 1):
+      print("#MODEL %d: %f" %(i,end-start))
 
   print ('DNN Regression complete!')
 
