@@ -65,12 +65,15 @@ if (opt == 1):
     n_models = int(sys.argv[1])
   for i in range(n_models): 
     start = time.time()
-    lambd = 10**(-(lambd_max - lambd_min)/2.0) # Regularization parameter
-    layers_dims = np.zeros(int((n_layers_max - n_layers_min)/2.0)) # DNN architecture
+    lbd_inter = (lambd_max-lambd_min)/n_models
+    lambd = 10**(-(lambd_min + i*lbd_inter)) # Regularization parameter
+    layers_inter = (n_layers_max - n_layers_min)/n_models
+    layers_dims = np.zeros(int(n_layers_min + i *layers_inter))# DNN architecture
     layers_dims[0] = n_var # Input Layer size
     layers_dims[layers_dims.shape[0]-1] = n_var # Output layer size
+    hidden_inter = (n_hidden_max - n_hidden_min)/n_models
     for j in range(1,layers_dims.shape[0]-1):
-      layers_dims[j] = int((n_hidden_max - n_hidden_min)/2.0) # Hidden layers
+      layers_dims[j] = int((n_hidden_min + i*hidden_inter)) # Hidden layers
       
     system_identification(X_train,Y_train,layers_dims,lambd,learning_rate,num_iter,h,i,nt_s) # Regression step via DNN
     end = time.time()
