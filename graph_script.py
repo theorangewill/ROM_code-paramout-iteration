@@ -41,11 +41,11 @@ for file in sys.argv[1:]:
         full_cnt = [i/5.0 for i in full_cnt]
         #par_cnt.sort()
         #full_cnt.sort()
-        res_machines[file_name][paramount_vec]=par_cnt
-        full_cnt
+        res_machines[file_name][paramount_vec] = par_cnt
+        fres_machines[file_name][full_vec] = full_cnt
 
 x_axis = range(1,6)
 for machine in res_machines:
-    plt.plot(x_axis,res_machines[machine][0],label=machine)
+    plt.plot(x_axis,res_machines[machine][full_vec],label=machine)
     plt.legend()
 plt.show()
