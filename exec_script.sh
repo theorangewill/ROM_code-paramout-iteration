@@ -1,1 +1,1 @@
-cd code && sh run.sh p
+cd code && sh run.sh 5 50
