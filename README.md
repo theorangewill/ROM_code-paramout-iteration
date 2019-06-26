@@ -8,7 +8,7 @@ Este repositório fornece o código preparado para execução do trabalho práti
 
 Recomendamos a utilização de dois tipos de instâncias para validação. Para utilizar o tensorflow na CPU, utilizamos da família c5. Já para o tensorflow na GPU, utilizamos as instâncias das famílias p2 e p3.
 
-#Imagens
+# Imagens
 
 Para imagens, recomendamos pelo menos 70GB de disco, para garantir espaço de armazenamento dos resultados. 
 Para utilização do tensorflow na CPU, utilizamos a imagem Ubuntu Server 18.04 LTS [ami-024a64a6685d05041]. 
@@ -41,4 +41,5 @@ cd code && sh run.sh <p_number> <full_number>
 ```
 Onde *<p_number>* é o número de iterações em paramount, e *<full_number>* é o número de execuções utilizadas para validação do método paramount.
 A execução apresentada consiste de 5 execuções em *paramount iteration*, seguidas de 5 execuções do número de iterações que estimula uma execução cheia (*full_number*).
-Outra alternativa é executar o script *./exec_script* na raíz do repositório, que executará 
+
+Outra alternativa é executar o script *./exec_script* na raíz do repositório, que chama o script *run.sh* com p_number = 5 e full_number = 5 chama o script *run.sh* com p_number = 5 e full_number = 50. 
