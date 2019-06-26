@@ -7,8 +7,6 @@ ARCH=amd64
 CURRDIR=$(pwd)
 GOPATH=${HOME}/go
 PATH=/usr/local/go/bin:${PATH}:${GOPATH}/bin
-source ~/.bashrc
-
 
 sudo DEBIAN_FRONTEND=noninteractive apt-get update -qy && \
 	sudo DEBIAN_FRONTEND=noninteractive apt-get install -qy build-essential \

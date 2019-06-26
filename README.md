@@ -1,93 +1,44 @@
 # DNN-ROM code 
 The DNN-ROM code can be used for construction of reduced order models, ROMs, of fluid flows. The code employs a combination of flow modal decomposition and regression analysis. Spectral proper orthogonal decomposition, SPOD, is applied to reduce the dimensionality of the model and, at the same time, filter the POD temporal modes. The regression step is performed by a deep feedforward neural network, DNN, and the current framework is implemented in a context similar to the sparse identification of non-linear dynamics algorithm, SINDy. Test cases such as the compressible flow past a cylinder and the turbulent flow computed by a large eddy simulation of a plunging airfoil under dynamic stall are provided. For more details, see https://arxiv.org/abs/1903.05206. 
 
-# Required packages 
-Your system will need the following packages to run the code:
-1. GFortran compiler
-2. Python 3.6, including these modules
-    - Numpy
-    - Matplotlib
-    - Scipy
-    - Scikit-optimize
-    - Surrogate modeling toolbox (SMT) 
-3. Tensorflow (GPU or CPU support)
-4. CGNS 
+# Trabalho 
+Este repositório fornece o código preparado para execução do trabalho prático da disciplina MO833, incluindo scripts de automatização e uma receita de container que executa a aplicação.
 
-# Installation 
-Install the required packages and then clone the repository from github.
+# Instâncias utilizadas
 
-# Example 1 - Compressible flow past a cylinder
+Recomendamos a utilização de dois tipos de instâncias para validação. Para utilizar o tensorflow na CPU, utilizamos da família c5. Já para o tensorflow na GPU, utilizamos as instâncias das famílias p2 e p3.
 
-In this example, the full order model (FOM) is obtained by solving the compressible Navier Stokes equations as detailed in (https://arxiv.org/abs/1903.05206, section 4.2). The numerical simulations are conducted for Reynolds and Mach numbers Re = 150 and M = 0.4, respectively. The grid configuration consists of a body-fitted O-grid with 421 × 751 points in the streamwise and wall-normal directions, respectively. The training data comprises the first 280 snapshots of the FOM, and the validation data contains the next 145 snapshots. 
+#Imagens
 
-We are going to build a reduced order model capable to predict the flowfield beyond the training. The final form of the ROM is an ordinary differential equation (ODE) system. 
+Para imagens, recomendamos pelo menos 70GB de disco, para garantir espaço de armazenamento dos resultados. 
+Para utilização do tensorflow na CPU, utilizamos a imagem Ubuntu Server 18.04 LTS [ami-024a64a6685d05041]. 
+Para utilizalção de tensorflow na GPU, utilizamos a imagem Deep Learning AMI (Ubuntu) Version 18.1 [ami-024a64a6685d05041], que já possui os drivers CUDA instalados.
 
-## 1 - Download the cylinder data
-First, download the cylinder data: 
+# Receita
 
-https://www.dropbox.com/sh/ji6i5u8valqyda8/AABtEYaZ7vG-62q6h4toQKBTa?dl=0
+Para criar o container a partir da receita, basta executar:
+* Tensorflow para CPU:
+```sh
+sudo ./install_dep.sh cpu
+```
+* Tensorflow para GPU:
+```sh
+sudo ./install_dep.sh 
+```
 
-## 2 - Define the parameters in the inputs.inp file
-In the folder "code", we have a file called "inputs.inp". In this file, we specify the information required to construct the reduced order model. There are comments explaining the inputs list. In order to run this example, we just need to modify lines 1 and 3.
+Ao final da execução, será criado um container de nome *rom_dnn.sif*.
 
-    - In line 1, specify the path to the cylinder data. For example: /home/cfd/Desktop/hugo/cylinder_data/
-    - In line 3, specify the path to the folder "code". For example: /home/cfd/Desktop/hugo/ROM_code/code/
-    
-## 3 - Run the code    
-Now, we can run the code by open a terminal in the folder "code" and typing 
-      
-    sh run.sh 
+*Obs: Não esqueça de utilizar --nv caso esteja executando a receita em uma instância com GPUs.*
 
-The output file is a CGNS file containing the ROM solutions for a determined number of snapshots (listed in the inputs.inp file). For all candidate models evaluated, the DNN parameters and hyperparameters can be found in the folder ".../regression/deep_learning/results/". 
-
-Videos comparing the FOM and ROM solutions:
-    
-https://www.youtube.com/watch?v=52n4CP-01a8<br/>
-https://www.youtube.com/watch?v=e8vASdxMUg8
-    
-In the "inputs.inp" file, we can specify the:
-
-    training and validation data;
-    fluid region of interest for the construction of the ROM; 
-    numerical scheme used to compute the derivative of the temporal modes;
-    number of POD modes; 
-    SPOD filter size and type;
-    norm for the POD correlation matrix; 
-    hyperparameters search space;
-    hyperparameter optimization strategy; 
-    number of candidate models to be evaluated;
-    number of snapshots for reconstruction of the flowfield. 
- 
- So, there are many parameters to play with here to improve the accuracy of the reduced order model.
-   
-# Example 2 - Deep dynamic stall of plunging airfoil
-
-In this example, we are going to reconstruct a turbulent flow involving dynamic stall of a plunging airfoil. Further details about the FOM can be found in https://arxiv.org/abs/1903.05206, section 4.2.2. Insteady of training the neural network as in the example 1, it will be given the DNN parameters already trained as well the POD modes computed from the training data (the first two cycles).
-
-## 1 - Download the dynamical stall data 
-First, download the dynamical stall data to the directory ".../ROM_code/examples/dynamical_stall/data/"
-
-https://www.dropbox.com/sh/6qjz6eyexp1m5yu/AABo4A0_btk-ciKDS2DRsoiTa?dl=0
-    
-## 2 - Predict the POD temporal modes
-In the folder ".../ROM_code/examples/dynamic_stall/", there is a python code called "reconst_best_model.py" that reconstruct the temporal modes. As we have the DNN parameters and the initial conditions, we can solve the system of coupled ODEs that describe the dynamics of the temporal modes by runnning the python code
-
-    python reconst_best_model.py
-    
-The output is the POD temporal modes. 
-
-## 3 - Reconstruct the flowfield
-
-Once we have the POD temporal and spatial modes, we can reconstruct the flowfield by running the following commands:
-
-    sh compile.sh
-    ./reconst.out
-    
-The output file is a CGNS file containing the ROM solutions for a determined number of snapshots. In the "reconst_best_model.py" code, we can set the time step and the number of snapshots for reconstruction, hence the reduced order model obtained allows to predict the flowfield beyond the training window with larger or smaller time increments than those used by the full order model.
-
-Videos comparing the FOM and ROM solutions:
-    
-https://www.youtube.com/watch?v=LWS98UX-YqA<br/>
-https://www.youtube.com/watch?v=sxgaJTJYCls<br/>
-https://www.youtube.com/watch?v=eE3Lem1EX8w (3D case, not provided in this example)
-
+# Script de execução
+Para executar o código, basta executar o script shell dentro da pasta *code*
+```sh
+cd code && sh run.sh
+```
+Para executar apenas utilizando o método de paramount iteration, utilize:
+```sh
+cd code && sh run.sh <p_number> <full_number>
+```
+Onde *<p_number>* é o número de iterações em paramount, e *<full_number>* é o número de execuções utilizadas para validação do método paramount.
+A execução apresentada consiste de 5 execuções em *paramount iteration*, seguidas de 5 execuções do número de iterações que estimula uma execução cheia (*full_number*).
+Outra alternativa é executar o script *./exec_script* na raíz do repositório, que executará 

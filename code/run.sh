@@ -1,4 +1,7 @@
 #!/bin/bash
+cd ..
+RESULTS_FILE=$(pwd)/results.txt
+cd code/
 cp inputs.inp pod/ &&
 cd pod/ &&
 sh clean.sh &&
@@ -11,40 +14,25 @@ sh compile.sh &&
 cd .. &&
 cd deep_learning/
 if [ "$#" -gt 0 ]; then
-	PARAMOUT=5
-	FULL=50
-	ITYPE=$(curl http://169.254.169.254/latest/meta-data/instance-type).txt
-        rm $ITYPE
-	echo "paramout" >> $ITYPE 
+	PARAMOUT=$1
+	FULL=$2
+	echo "paramout" >> $RESULTS_FILE 
 	for i in `seq 1 5`
 	do
-		echo $i >> $ITYPE
-		python DNN_regression.py $PARAMOUT >> $ITYPE
+		echo $i >> $RESULTS_FILE
+		python DNN_regression.py $PARAMOUT >> $RESULTS_FILE
 	done
-	echo "full" >> $ITYPE
+	echo "full" >> $RESULTS_FILE
 	for i in `seq 1 5`
 	do
-		echo $i >> $ITYPE
-		python DNN_regression.py $FULL >> $ITYPE
+		echo $i >> $RESULTS_FILE
+		python DNN_regression.py $FULL >> $RESULTS_FILE
 	done
-	mv $ITYPE ../../../results/.
-	cd ../../..
-	git pull
-	git add results/$ITYPE
-	git commit -m "$ITYPE"
-	git push && aws ec2 terminate-instances --instance-ids $IID
-	else
-		python DNN_regression.py &&
-                python MAE.py &&
-                cd .. &&
-                cd .. &&
-                cd reconst &&
-                python reconst_best_model.py 
+else
+	python DNN_regression.py &&
+	python MAE.py &&
+	cd .. &&
+	cd .. &&
+	cd reconst &&
+	python reconst_best_model.py 
 fi
-
-
-
-
-
-
-
