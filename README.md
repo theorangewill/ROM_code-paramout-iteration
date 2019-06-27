@@ -42,6 +42,6 @@ cd code && sh run.sh <p_number> <full_number>
 Onde *<p_number>* é o número de iterações em paramount, e *<full_number>* é o número de execuções utilizadas para validação do método paramount.
 A execução apresentada consiste de 5 execuções em *paramount iteration*, seguidas de 5 execuções do número de iterações que estimula uma execução cheia (*full_number*).
 
-Outra alternativa é executar o script *./exec_script* na raíz do repositório, que chama o script *run.sh* com p_number = 5 e full_number = 5 chama o script *run.sh* com p_number = 5 e full_number = 50. 
+Outra alternativa é executar o script *./exec_script.sh* na raíz do repositório, que chama o script *run.sh* com p_number = 5 e full_number = 50. 
 
 Ao fim da execução, um arquivo chamado *results.txt* será armazenado na raíz do repositório, apresentando os tempos de execução computados.
