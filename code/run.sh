@@ -16,6 +16,7 @@ cd deep_learning/
 if [ "$#" -gt 0 ]; then
 	PARAMOUT=$1
 	FULL=$2
+	rm $RESULTS_FILE
 	echo "paramout" >> $RESULTS_FILE 
 	for i in `seq 1 5`
 	do
