@@ -28,10 +28,15 @@ sudo ./install_dep.sh
 
 Ao final da execução, será criado um container de nome *rom_dnn.sif*.
 
-*Obs: Não esqueça de utilizar --nv caso esteja executando a receita em uma instância com GPUs.*
-
 # Script de execução
-Para executar o código, basta executar o script shell dentro da pasta *code*
+Para executar a aplicação, é necessário primeiro entrar no ambiente singularity, utilizando o container gerado anteriormente:
+```sh
+sudo singularity shell --nv rom_dnn.sif
+```
+*Obs: Utilize --nv apenas ao executar o experimento em instâncias com GPU*
+
+Então, deve-se acessar a pasta *code* e inicializar o script de execução:
+
 ```sh
 cd code && sh run.sh
 ```
