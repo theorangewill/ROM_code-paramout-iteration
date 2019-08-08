@@ -18,17 +18,11 @@ if [ "$#" -gt 0 ]; then
 	FULL=$2
 	rm $RESULTS_FILE
 	echo "paramout" >> $RESULTS_FILE 
-	for i in `seq 1 5`
-	do
-		echo $i >> $RESULTS_FILE
-		python DNN_regression.py $PARAMOUT >> $RESULTS_FILE
-	done
+	echo $i >> $RESULTS_FILE
+	python DNN_regression.py $PARAMOUT >> $RESULTS_FILE
 	echo "full" >> $RESULTS_FILE
-	for i in `seq 1 5`
-	do
-		echo $i >> $RESULTS_FILE
-		python DNN_regression.py $FULL >> $RESULTS_FILE
-	done
+	echo $i >> $RESULTS_FILE
+	python DNN_regression.py $FULL >> $RESULTS_FILE
 else
 	python DNN_regression.py &&
 	python MAE.py &&
