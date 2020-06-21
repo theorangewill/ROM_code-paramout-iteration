@@ -33,26 +33,3 @@ if [ $1 == "cpu" ]; then
 fi
 singularity build rom_dnn.sif dnn_rom.def
 nvidia-modprobe -u -c=0
-apt-get update
-apt-get install -y software-properties-common python3
-add-apt-repository ppa:jonathonf/python-3.6
-apt-get update
-apt-get install -y python3.6 time
-update-alternatives --install /usr/bin/python python /usr/bin/python3.6 1
-update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 1
-update-alternatives --set python /usr/bin/python3.6
-update-alternatives --set python3 /usr/bin/python3.6
-apt-get install -y wget 
-curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-python get-pip.py
-rm -f get-pip.py
-apt-get install -y python3.6-dev gcc g++ gfortran 
-python3.6 -m pip install numpy matplotlib scipy Cython scikit-optimize 
-python3.6 -m pip install tensorflow-gpu
-python3.6 -m pip install smt
-wget https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.10/hdf5-1.10.5/src/hdf5-1.10.5.tar.gz && tar zxvfp hdf5-1.10.5.tar.gz && cd hdf5-1.10.5
-./configure && make && make install
-cd .. && rm -rf hdf5-1.10.5
-apt-get install -y git
-git clone -b master https://github.com/CGNS/CGNS.git && cd CGNS/src
-./configure && make && make install
