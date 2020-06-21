@@ -14,17 +14,7 @@ sh compile.sh &&
 cd .. &&
 cd deep_learning/
 if [ "$#" -gt 0 ]; then
-	PARAMOUT=$1
-	FULL=$2
-	rm $RESULTS_FILE
-  if [ "$PARAMOUNT" -gt 0 ]; then
-    echo "paramout" >> $RESULTS_FILE 
-    echo $i >> $RESULTS_FILE
-    python DNN_regression.py $PARAMOUT >> $RESULTS_FILE
-  fi
-	echo "full" >> $RESULTS_FILE
-	echo $i >> $RESULTS_FILE
-	python DNN_regression.py $FULL >> $RESULTS_FILE
+	python DNN_regression.py $1 >> $RESULTS_FILE
 else
 	python DNN_regression.py &&
 	python MAE.py &&
