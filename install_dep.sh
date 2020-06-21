@@ -7,28 +7,15 @@ ARCH=amd64
 CURRDIR=$(pwd)
 GOPATH=${HOME}/go
 PATH=/usr/local/go/bin:${PATH}:${GOPATH}/bin
-
+while [ "x$(sudo lsof /var/lib/dpkg/lock-frontend)" != "x" ] ; do
+    sleep 30
+done
 sudo DEBIAN_FRONTEND=noninteractive apt-get update -qy && \
 	sudo DEBIAN_FRONTEND=noninteractive apt-get install -qy build-essential \
 	libssl-dev uuid-dev libgpgme11-dev libseccomp-dev pkg-config squashfs-tools
 	wget -O /tmp/go${VERSION}.${OS}-${ARCH}.tar.gz https://dl.google.com/go/go${VERSION}.${OS}-${ARCH}.tar.gz && \
 	sudo tar -C /usr/local -xzf /tmp/go${VERSION}.${OS}-${ARCH}.tar.gz 
 curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s -- -b $(go env GOPATH)/bin v1.15.0
-##Instalação do singularity
-mkdir -p ${GOPATH}/src/github.com/sylabs && \
-	cd ${GOPATH}/src/github.com/sylabs && \
-	git clone https://github.com/sylabs/singularity.git && \
-	cd singularity
-git checkout v3.2.1
-cd ${GOPATH}/src/github.com/sylabs/singularity && \
-	./mconfig && \
-	cd ./builddir && \
-	make && \
-	sudo make install
-#echo "Verificando instalaçao"
-singularity version 1>/dev/null && echo "Instalado com sucesso"
-cd $CURRDIR
-rm -rf $GOPATH
 #Download da base de dados e preparação do código
 echo "Baixando base de dados"
 apt-get install -y unzip
@@ -46,3 +33,26 @@ if [ $1 == "cpu" ]; then
 fi
 singularity build rom_dnn.sif dnn_rom.def
 nvidia-modprobe -u -c=0
+apt-get update
+apt-get install -y software-properties-common python3
+add-apt-repository ppa:jonathonf/python-3.6
+apt-get update
+apt-get install -y python3.6 time
+update-alternatives --install /usr/bin/python python /usr/bin/python3.6 1
+update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 1
+update-alternatives --set python /usr/bin/python3.6
+update-alternatives --set python3 /usr/bin/python3.6
+apt-get install -y wget 
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+python get-pip.py
+rm -f get-pip.py
+apt-get install -y python3.6-dev gcc g++ gfortran 
+python3.6 -m pip install numpy matplotlib scipy Cython scikit-optimize 
+python3.6 -m pip install tensorflow-gpu
+python3.6 -m pip install smt
+wget https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.10/hdf5-1.10.5/src/hdf5-1.10.5.tar.gz && tar zxvfp hdf5-1.10.5.tar.gz && cd hdf5-1.10.5
+./configure && make && make install
+cd .. && rm -rf hdf5-1.10.5
+apt-get install -y git
+git clone -b master https://github.com/CGNS/CGNS.git && cd CGNS/src
+./configure && make && make install
