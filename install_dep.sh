@@ -20,10 +20,9 @@ curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | 
 #Download da base de dados e preparação do código
 echo "Baixando base de dados"
 sudo apt-get install -y unzip
-cd ..
 mkdir dynamic_stall_data 
 cd dynamic_stall_data
-#wget --no-check-certificate "https://onedrive.live.com/download?cid=68B743CBCE8A14C0&resid=68B743CBCE8A14C0%21107533&authkey=AIRCWrGDBz471sE" 
+wget --no-check-certificate "https://onedrive.live.com/download?cid=68B743CBCE8A14C0&resid=68B743CBCE8A14C0%21107533&authkey=AIRCWrGDBz471sE" 
 mv * qSpanAvg.cgns 
 cd ..
 cd ROM_code-paramout-iteration/
@@ -34,8 +33,6 @@ echo Instalando imagem do container
 if [ $1 == "cpu" ]; then
 	sed -i 's/tensorflow-gpu/tensorflow/' dnn_rom.def
 fi
-singularity build rom_dnn.sif dnn_rom.def
-
 sudo apt-get update
 sudo apt-get install -y software-properties-common python3
 #sudo add-apt-repository ppa:jonathonf/python-3.6
@@ -59,6 +56,5 @@ cd .. && rm -rf hdf5-1.10.5
 sudo apt-get install -y git
 git clone -b master https://github.com/CGNS/CGNS.git && cd CGNS/src
 ./configure && make && make install
-
 
 nvidia-modprobe -u -c=0
